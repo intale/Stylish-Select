@@ -1,15 +1,15 @@
 /**
-* Stylish Select 0.4.9 - jQuery plugin to replace a select drop down box with a stylable unordered list
-* http://github.com/scottdarby/Stylish-Select
-*
-* Requires: jQuery 1.3 or newer
-*
-* Contributions from Justin Beasley: http://www.harvest.org/ 
-* Anatoly Ressin: http://www.artazor.lv/ Wilfred Hughes: https://github.com/Wilfred
-* Grigory Zarubin: https://github.com/Craigy-
-*
-* Dual licensed under the MIT and GPL licenses.
-*/
+ * Stylish Select 0.4.9 - jQuery plugin to replace a select drop down box with a stylable unordered list
+ * http://github.com/scottdarby/Stylish-Select
+ *
+ * Requires: jQuery 1.3 or newer
+ *
+ * Contributions from Justin Beasley: http://www.harvest.org/
+ * Anatoly Ressin: http://www.artazor.lv/ Wilfred Hughes: https://github.com/Wilfred
+ * Grigory Zarubin: https://github.com/Craigy-
+ *
+ * Dual licensed under the MIT and GPL licenses.
+ */
 (function($){
     //add class to html tag
     $('html').addClass('stylish-select');
@@ -38,8 +38,8 @@
                 return -1;
 
             var k = n >= 0
-            ? n
-            : Math.max(len - Math.abs(n), 0);
+                ? n
+                : Math.max(len - Math.abs(n), 0);
 
             for (; k < len; k++){
                 if (k in t && t[k] === searchElement)
@@ -63,10 +63,10 @@
         //added by Justin Beasley
         resetSS: function(){
             var oldOpts = $(this).data('ssOpts');
-                $this = $(this);
-                $this.next().remove();
-                //unbind all events and redraw
-                $this.unbind('.sSelect').sSelect(oldOpts);
+            $this = $(this);
+            $this.next().remove();
+            //unbind all events and redraw
+            $this.unbind('.sSelect').sSelect(oldOpts);
         }
     });
 
@@ -221,9 +221,9 @@
 
             function positionHideFix(){
                 $containerDiv.css(
-                {
-                    position: 'static'
-                });
+                    {
+                        position: 'static'
+                    });
             }
 
             $containerDivText.bind('click.sSelect',function(event){
@@ -240,14 +240,19 @@
 
                 //hide all menus apart from this one
                 $('.SSContainerDivWrapper')
-                .not($(this).next())
-                .hide()
-                .parent()
-                .css('position', 'static')
-                .removeClass('newListSelFocus');
+                    .not($(this).next())
+                    .hide()
+                    .parent()
+                    .css('position', 'static')
+                    .removeClass('newListSelFocus');
 
                 //show/hide this menu
                 $containerDivWrapper.toggle();
+                if($containerDivWrapper.is(":visible")){
+                    $containerDiv.addClass("dropdown-active");
+                }else{
+                    $containerDiv.removeClass("dropdown-active");
+                }
                 positionFix();
 
                 //scroll list to selected item
@@ -267,7 +272,7 @@
                     currentIndex = prevIndex;
                     navigateList(currentIndex);
                 }
-
+                $containerDiv.removeClass("dropdown-active");
                 $containerDivWrapper.hide();
                 positionHideFix();
             }
@@ -300,8 +305,8 @@
                     $newLi.removeClass('hiLite');
                 } else {
                     $newLi.removeClass('hiLite')
-                    .eq(currentIndex)
-                    .addClass('hiLite');
+                        .eq(currentIndex)
+                        .addClass('hiLite');
 
                     var text = $newLi.eq(currentIndex).text(),
                         val = $newLi.eq(currentIndex).parent().data('key');
@@ -337,8 +342,8 @@
                     return false;
                 }
                 var $currentOpt  = $targetInput.find(':selected');
-                    currentIndex = $targetInput.find('option').index($currentOpt);
-                    navigateList(currentIndex);
+                currentIndex = $targetInput.find('option').index($currentOpt);
+                navigateList(currentIndex);
             });
 
             //handle up and down keys
@@ -444,7 +449,7 @@
             });
 
             //hide list on blur
-            $(document).bind('click.sSelect',function(){
+            $(document).unbind('click.sSelect').bind('click.sSelect',function(){
                 $containerDiv.removeClass('newListSelFocus');
                 if ($containerDivWrapper.is(':visible')){
                     closeDropDown(false, true);
