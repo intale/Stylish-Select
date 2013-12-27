@@ -49,6 +49,12 @@
         };
     }
 
+    $(window).bind("disposeSS", function(){
+        $('html').removeClass('stylish-select');
+        $(window).unbind('resize.sSelect scroll.sSelect');
+        $(document).unbind('click.sSelect');
+    });
+
     //utility methods
     $.fn.extend({
         getSetSSValue: function(value){
@@ -449,7 +455,7 @@
             });
 
             //hide list on blur
-            $(document).unbind('click.sSelect').bind('click.sSelect',function(){
+            $(document).bind('click.sSelect',function(){
                 $containerDiv.removeClass('newListSelFocus');
                 if ($containerDivWrapper.is(':visible')){
                     closeDropDown(false, true);
