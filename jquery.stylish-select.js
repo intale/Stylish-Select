@@ -11,9 +11,6 @@
  * Dual licensed under the MIT and GPL licenses.
  */
 (function($){
-    //add class to html tag
-    $('html').addClass('stylish-select');
-
     //Cross-browser implementation of indexOf from MDN: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
     if (!Array.prototype.indexOf){
         Array.prototype.indexOf = function(searchElement /*, fromIndex */){
@@ -77,6 +74,9 @@
     });
 
     $.fn.sSelect = function(options){
+        //add class to html tag
+        if(!$("html").hasClass('stylish-select')) $('html').addClass('stylish-select');
+
         return this.each(function(){
             var defaults = {
                 defaultText:    'Please select',
